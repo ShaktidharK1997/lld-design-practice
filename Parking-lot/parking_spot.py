@@ -16,6 +16,8 @@ class ParkingSpot:
 
         if vehicle.get_type()!= self.vehicle_type:
             raise Exception('Vehicle type is not allowed')
+        
+        self.parked_vehicle = vehicle
 
     def unpark_vehicle(self):
         if self.is_available():

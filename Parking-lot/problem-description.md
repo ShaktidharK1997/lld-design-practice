@@ -13,17 +13,24 @@ Parking lot agent
 7) do we need to return a reservation Id with parking spot number? 
 
 Classes, Interfaces and Enumerations 
-1) Parking lot class (Singleton pattern) -> only one instance of parking lot created 
-    - Park function (type of car)-> 
-        Iterate over all the level objects part of lot and check for avail
-        If avail, then call park_level fn (type of car)
+1) Parking Lot Class 
+    - Singleton class, only one instance of Parking Lot possible
+    - Parking lot has a private attribute levels which contains a list of Level objects
+    - Has methods park_vehicle and unpark_vehicle which park and unpark vehicle in corresponding level according to availability
+    
+2) Level Class
+    - Level class contains attribute level_number which holds the level of the Parking Lot and list variable called Spots which holds a list of parking spots of a pre-defined type 
+    - Methods Park_vehicle and unpark_vehicle which do the operations for that level. Methods return spot object if success or None if not success
+    - It also has a mapping object that maps the vehicle to the parking spot in order to reduce the time taken to find spot to unpark vehicle 
+    - Method display_availability that displays the availability of all the parking spots in that level
 
-2) A level class which will be part of the parking lot class as a list of levels 
-    - Park level fn - handles parking within that level
-
-3) A parking spot class which will be part of levels class as a list of spots 
-    - tracks avail and parked vehicle 
+3) Parking Spot class 
+    - Has attributes parked_vehicle (holds instance of parked vehicle), spot_number (unique identification) and vehicle type enum for marking it with a type of vehicle 
+    - Methods park_vehicle and unpark_vehicle 
+    - Method get_vehicle_type to return its type 
+    - Method get_parked_vechile to get parked vechile type 
 
 4) Vehicle type as an Enum with 3 types (motorcycle, truck and car)
-PL -> Level -> Spot 
+
+5) 
 

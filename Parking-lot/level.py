@@ -12,28 +12,26 @@ class Level:
     
     def park_vehicle(self, vehicle: Vehicle):
         if self.available_spots == 0:
-            raise Exception('No parking spots available')
+            return False
 
         for spot in self.parking_spots:
             if spot.is_available() and spot.get_vehicle_type() == vehicle.get_type():
                 spot.park_vehicle(vehicle)
                 self.spot_vehicle_map[vehicle.license_plate] = spot
                 self.available_spots -= 1
-                return spot
-            return None
+                return True
+        return False
     
     def unpark_vehicle(self, vehicle: Vehicle):
         if vehicle.license_plate not in self.spot_vehicle_map:
-            raise Exception('Vehicle not found')
+            return False
         
         spot = self.spot_vehicle_map[vehicle.license_plate]
         spot.unpark_vehicle()
         self.available_spots += 1
         del self.spot_vehicle_map[vehicle.license_plate]
-        return spot
+        return True
 
     def display_availability(self):
         for spot in self.parking_spots:
             print(f'Spot Number: {spot.spot_number} is available: {spot.is_available()}')
-    
-        
