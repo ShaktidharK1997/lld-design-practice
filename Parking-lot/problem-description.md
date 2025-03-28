@@ -18,6 +18,7 @@ Classes, Interfaces and Enumerations
     - Parking lot has a private attribute levels which contains a list of Level objects
     - Has methods park_vehicle and unpark_vehicle which park and unpark vehicle in corresponding level according to availability
 
+
 2) Level Class
     - Level class contains attribute level_number which holds the level of the Parking Lot and list variable called Spots which holds a list of parking spots of a pre-defined type 
     - Methods Park_vehicle and unpark_vehicle which do the operations for that level. Methods return spot object if success or None if not success

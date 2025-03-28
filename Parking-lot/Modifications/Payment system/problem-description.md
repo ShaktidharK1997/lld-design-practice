@@ -25,3 +25,8 @@ Classes, Interfaces and Enumerations
 4. Receipt class 
     - Attributes : Vehicle license plate, Vehicle entry time, Vehicle type, Fees for parking, parking spot number
     - Methods : Print receipt, verify receipt 
+
+
+Clarifying questions:
+1) receipt in only USD and how to handle rounding off ? 
+2) 
