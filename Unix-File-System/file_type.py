@@ -1,3 +1,4 @@
+from enum import Enum
 class FileType(Enum):
     """Enum for file types."""
     TEXT = ".txt"  
@@ -8,5 +9,3 @@ class FileType(Enum):
     VIDEO = '.mp4'
     ARCHIVE = '.zip'
 
-    def __str__(self):
-        return self.name.lower()
