@@ -13,22 +13,9 @@ class FileSystem:
         """
         self.filters.append(filter)
         
-    def clear_filters(self):
+    def search(self, root: File, logic: str) -> List[File]:
         """
-        Clear all filters from the file system.
-        """
-        self.filters = []
-    
-    def search(self, root: File, logic: Literal["AND", "OR"] = "OR") -> List[File]:
-        """
-        Search for files in the file system that match the filters.
-        
-        Parameters:
-            root: The root file or directory to start searching from
-            logic: The logic to apply when combining filters, either "AND" or "OR"
-            
-        Returns:
-            A list of files that match the filter criteria
+        Search for files in the file system that match the filters using AND/OR logic.
         """
         results = []
         self._search_recursive(root, results, logic)
@@ -36,47 +23,30 @@ class FileSystem:
     
     def _search_recursive(self, file: File, results: List[File], logic: str):
         """
-        Recursively search for files in the file system that match the filters.
-        
-        Parameters:
-            file: The current file or directory being processed
-            results: The list to store matching files
-            logic: The logic to apply when combining filters ("AND" or "OR")
+        Search for files in File System recursively across all files and folders in the file system 
+        Logic represents the use of either AND/OR Logic 
         """
-        # Skip filtering if we have no filters
         if self.filters:
-            matches = self._apply_filters(file, logic)
-            if matches:
+            match = self._apply_filter(file, logic)
+            if match:
                 results.append(file)
         
-        # Recursively process children if this is a directory
+        # If File is a directory 
         if file.is_directory:
             for child in file.children:
                 self._search_recursive(child, results, logic)
     
-    def _apply_filters(self, file: File, logic: str) -> bool:
+    def _apply_filter(self, file: File, logic: str):
         """
-        Apply filters to a file using the specified logic.
-        
-        Parameters:
-            file: The file to apply filters to
-            logic: The logic to use when combining filters ("AND" or "OR")
-            
-        Returns:
-            True if the file matches the filter criteria, False otherwise
+        Function to apply file system filters based on the logic provided
         """
-        if not self.filters:
-            return True
-            
-        if logic == "AND":
-            # File must match ALL filters
-            for filter in self.filters:
-                if not filter.apply(file):
-                    return False
-            return True
-        else:  # "OR" logic
-            # File must match ANY filter
+        if logic == 'OR':
             for filter in self.filters:
                 if filter.apply(file):
                     return True
             return False
+        else:
+            for filter in self.filters:
+                if not filter.apply(file):
+                    return False
+            return True
